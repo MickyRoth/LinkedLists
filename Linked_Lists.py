@@ -39,7 +39,7 @@ class VerketteteListe:
         while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
             aktuell = aktuell.nachfolger              # ...den Nachfolger zwischenspeichern
             i+=1                                      # Indexvariable erhöhen
-        if index>i: raise ValueError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
+        if index>i: raise IndexError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
         return aktuell.daten # Daten des aktuellen Nodes zurückgeben
 
     def delete(self, index):
@@ -49,12 +49,21 @@ class VerketteteListe:
             vorgänger = aktuell                       # Vorgänger merken
             aktuell = aktuell.nachfolger              # ...den Nachfolger zwischenspeichern
             i+=1                                      # Indexvariable erhöhen
-        if index>i: raise ValueError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
-        vorgänger.nachfolger = aktuell.nachfolger     # Dem Vorgänger den Nachfolger vom zu löschenden Node zuweisen
-        del aktuell
+        if index>i: raise IndexError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
+        vorgänger.nachfolger = aktuell.nachfolger     # Dem Vorgänger den Nachfolger vom zu löschenden (aktuellen) Node zuweisen
+        del aktuell                                   # Aktuellen Node löschen
 
     def insert(self, index, daten):
-        pass
+        aktuell = self.head # Ersten Node zum aktuellen machen
+        i = 0 # Start beim ersten Index
+        while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
+            vorgänger = aktuell                       # Vorgänger merken
+            aktuell = aktuell.nachfolger              # ...den Nachfolger zwischenspeichern
+            i+=1                                      # Indexvariable erhöhen
+        if index>i: raise IndexError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
+        neuer_Node = Node(daten)                      # Neuen Node anlegen, Daten dort speichern
+        neuer_Node.nachfolger = aktuell               # Aktuellen Node als Nachfolger vom neuen Node festlegen
+        vorgänger.nachfolger = neuer_Node             # Neuen Node als Nachfolger des Vorgängers festlegen
 
 
 if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes das Hauptprogramm ausgeführt wird
@@ -73,3 +82,6 @@ if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes
 
     vkliste.delete(1)
     print("Lösche (.delete) Index 1:",vkliste)
+
+    vkliste.insert(1, "Neues Zweites")
+    print(vkliste)
