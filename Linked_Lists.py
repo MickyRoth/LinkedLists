@@ -17,11 +17,11 @@ class VerketteteListe:
     def __repr__(self):  # Diese Standardmethode liefert eine Repräsentation z.B. für print() zurück
         darstellung = [] # Temp-Variable für die Repräsentation (Darstellung) der VL
         aktuell = self.head # Ersten Node zum aktuellen machen
-        if self.head!=None: # Falls mindestens ein Node existiert
-            darstellung.append(aktuell.daten) # Daten aus erstem Node anhängen
-            while aktuell.nachfolger != None: # Solange ein Nachfolger vom aktuellen Node existiert
-                aktuell = aktuell.nachfolger  # Den Nachfolger zwischenspeichern
-                darstellung.append(aktuell.daten) # Daten aus Nachfolger an Repräsentation anhängen
+        if self.head!=None: # Falls mindestens ein Node existiert...
+            darstellung.append(aktuell.daten) # ...Daten aus erstem Node anhängen
+        while aktuell.nachfolger != None: # Solange ein Nachfolger vom aktuellen Node existiert
+            aktuell = aktuell.nachfolger  # Den Nachfolger zwischenspeichern
+            darstellung.append(aktuell.daten) # Daten aus Nachfolger an Repräsentation anhängen
         return str(darstellung)
 
     def append(self, daten):      # Iteriert durch die VL, falls nötig und hängt einen neuen Node an
@@ -37,15 +37,20 @@ class VerketteteListe:
 
     def get(self, index):   # Liefert die Daten des Nodes mit dem Index zurück
         aktuell = self.head # Ersten Node zum aktuellen machen
-        if self.head!=None: # Falls mindestens ein Node existiert
-            i = 0 # Start beim ersten Index
-            while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
-                aktuell = aktuell.nachfolger              # ...den Nachfolger zwischenspeichern
-                i+=1                                      # Indexvariable erhöhen
+        i = 0 # Start beim ersten Index
+        while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
+            aktuell = aktuell.nachfolger              # ...den Nachfolger zwischenspeichern
+            i+=1                                      # Indexvariable erhöhen
         if index>i: raise ValueError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
         return aktuell.daten # Daten des aktuellen Nodes zurückgeben
 
-if __name__ == "__main__":
+    def delete(self, index):
+        pass
+
+    def insert(self, index, daten):
+        pass
+
+if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes das Hauptprogramm ausgeführt wird
 
     vkliste = VerketteteListe() # Neue VK erzeugen
     vkliste.append("Erstes")    # An die neue VL anhängen
