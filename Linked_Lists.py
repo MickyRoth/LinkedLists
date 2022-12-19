@@ -77,7 +77,7 @@ if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes
 
     from random import uniform # Float-Zufallszahlen, nur zum Befüllen der VL
 
-    vkliste = VerketteteListe() # Neue VK erzeugen
+    vkliste = VerketteteListe() # Neue VL erzeugen
     vkliste.append("Erstes")    # An die neue VL anhängen
     vkliste.append("Zweites")
     vkliste.append("Drittes")
