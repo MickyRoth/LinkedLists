@@ -3,8 +3,6 @@
 # head = erster Node der VL
 # nachfolger = Nächstes Element der VL, steht im jeweiligen Node
 
-from random import uniform # Float-Zufallszahlen, nur zum Befüllen der VL
-
 class Node:
     def __init__(self, daten):
         self.daten = daten     # Node mit Daten füllen
@@ -45,12 +43,23 @@ class VerketteteListe:
         return aktuell.daten # Daten des aktuellen Nodes zurückgeben
 
     def delete(self, index):
-        pass
+        aktuell = self.head # Ersten Node zum aktuellen machen
+        i = 0 # Start beim ersten Index
+        while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
+            vorgänger = aktuell                       # Vorgänger merken
+            aktuell = aktuell.nachfolger              # ...den Nachfolger zwischenspeichern
+            i+=1                                      # Indexvariable erhöhen
+        if index>i: raise ValueError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
+        vorgänger.nachfolger = aktuell.nachfolger     # Dem Vorgänger den Nachfolger vom zu löschenden Node zuweisen
+        del aktuell
 
     def insert(self, index, daten):
         pass
 
+
 if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes das Hauptprogramm ausgeführt wird
+
+    from random import uniform # Float-Zufallszahlen, nur zum Befüllen der VL
 
     vkliste = VerketteteListe() # Neue VK erzeugen
     vkliste.append("Erstes")    # An die neue VL anhängen
@@ -61,3 +70,6 @@ if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes
 
     print(vkliste)          # Greift auf die Methode __repr__() zu, um die komplette VL zu printen
     print("Index 6:",vkliste.get(6))   # Greift auf .get() zurück, um einen bestimmten Node auszulesen
+
+    vkliste.delete(1)
+    print("Lösche (.delete) Index 1:",vkliste)
