@@ -45,14 +45,14 @@ class VerketteteListe:
         if index>i: raise ValueError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
         return aktuell.daten # Daten des aktuellen Nodes zurückgeben
 
-# main 
+if __name__ == "__main__":
 
-vkliste = VerketteteListe() # Neue VK erzeugen
-vkliste.append("Erstes")    # An die neue VL anhängen
-vkliste.append("Zweites")
-vkliste.append("Drittes")
-for i in range(3): vkliste.append(i)
-for i in range(3): vkliste.append(round(uniform(0,100),2))
+    vkliste = VerketteteListe() # Neue VK erzeugen
+    vkliste.append("Erstes")    # An die neue VL anhängen
+    vkliste.append("Zweites")
+    vkliste.append("Drittes")
+    for i in range(3): vkliste.append(i)
+    for i in range(3): vkliste.append(round(uniform(0,100),2))
 
-print(vkliste)          # Greift auf die Methode __repr__() zu, um die komplette VL zu printen
-print("Index 6:",vkliste.get(6))   # Greift auf .get() zurück, um einen bestimmten Node auszulesen
+    print(vkliste)          # Greift auf die Methode __repr__() zu, um die komplette VL zu printen
+    print("Index 6:",vkliste.get(6))   # Greift auf .get() zurück, um einen bestimmten Node auszulesen
