@@ -65,6 +65,13 @@ class VerketteteListe:
         neuer_Node.nachfolger = aktuell               # Aktuellen Node als Nachfolger vom neuen Node festlegen
         vorgänger.nachfolger = neuer_Node             # Neuen Node als Nachfolger des Vorgängers festlegen
 
+    def len(self):
+        aktuell = self.head # Ersten Node zum aktuellen machen
+        i = 0 # Start beim ersten Index
+        while aktuell.nachfolger != None:                       # Solange ein Nachfolger vom aktuellen Node existiert...
+            aktuell = aktuell.nachfolger                        # ...den Nachfolger zwischenspeichern
+            i+=1                                                # Indexvariable erhöhen
+        return i+1                                              # Daten des Indexzählers zurückgeben
 
 if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes das Hauptprogramm ausgeführt wird
 
@@ -85,3 +92,8 @@ if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes
 
     vkliste.insert(1, "Neues Zweites")
     print(vkliste)
+
+    print("Länge:",vkliste.len())
+
+    vkliste2 = VerketteteListe()
+    print("Länge:",vkliste2.len())
