@@ -34,6 +34,8 @@ class VerketteteListe:
         return
 
     def get(self, index):   # Liefert die Daten des Nodes mit dem Index zurück
+        if self.head == None:      # Wenn die VL noch leer ist
+            raise IndexError('linked-list-index out of range')
         aktuell = self.head # Ersten Node zum aktuellen machen
         i = 0 # Start beim ersten Index
         while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
@@ -66,6 +68,7 @@ class VerketteteListe:
         vorgänger.nachfolger = neuer_Node             # Neuen Node als Nachfolger des Vorgängers festlegen
 
     def len(self):
+        if self.head == None: return 0     # Wenn die VL noch leer ist
         aktuell = self.head # Ersten Node zum aktuellen machen
         i = 0 # Start beim ersten Index
         while aktuell.nachfolger != None:                       # Solange ein Nachfolger vom aktuellen Node existiert...
@@ -97,3 +100,5 @@ if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes
 
     vkliste2 = VerketteteListe()
     print("Länge:",vkliste2.len())
+    vkliste2.append("Huhu")
+    print(vkliste2.get(0))
