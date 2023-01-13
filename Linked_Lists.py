@@ -1,18 +1,26 @@
 # Verkettete Liste (VL) selbst implementiert - bislang nur init, append, get und VL-Ausgabe
-# Node = ein Element der VL
-# head = erster Node der VL
-# nachfolger = Nächstes Element der VL, steht im jeweiligen Node
 
 class Node:
+    '''
+    Klasse für die einzelnen Listenlemente (Nodes)
+    '''
     def __init__(self, daten):
         self.daten = daten     # Node mit Daten füllen
         self.nachfolger = None # Nachfolger ist (erstmal) keiner da
 
 class VerketteteListe:
+    ''' Klasse für eine Verkettete Liste (VL) 
+        Node = ein Element der VL
+        head = erster Node der VL
+        nachfolger = Nächstes Element der VL, steht im jeweiligen Node
+    '''
+
     def __init__(self):
+        ''' Initialisierung der verkettten Liste '''
         self.head = None # Liste ist noch leer, deshalb gibt es noch keinen Head (ersten Node)
 
     def __repr__(self):  # Diese Standardmethode liefert eine Repräsentation z.B. für print() zurück
+        ''' Erzeugt die print-Ausgabe (Repräsentation) der Liste'''
         darstellung = [] # Temp-Variable für die Repräsentation (Darstellung) der VL
         aktuell = self.head # Ersten Node zum aktuellen machen
         if self.head!=None: # Falls mindestens ein Node existiert...
@@ -23,6 +31,7 @@ class VerketteteListe:
         return str(darstellung)
 
     def append(self, daten):      # Iteriert durch die VL, falls nötig und hängt einen neuen Node an
+        '''Hängt ein daten-Element an die Liste an'''
         neuer_Node = Node(daten)  # Neuen Node anlegen, Daten dort speichern
         if self.head == None:      # Wenn die VL noch leer ist
             self.head = neuer_Node # Dann ist der neue Node der Head!
@@ -34,6 +43,7 @@ class VerketteteListe:
         return
 
     def get(self, index):   # Liefert die Daten des Nodes mit dem Index zurück
+        ''' Liefert das Element mit dem angegebenen Index zurück'''
         if self.head == None:      # Wenn die VL noch leer ist
             raise IndexError('linked-list-index out of range')
         aktuell = self.head # Ersten Node zum aktuellen machen
@@ -45,6 +55,7 @@ class VerketteteListe:
         return aktuell.daten # Daten des aktuellen Nodes zurückgeben
 
     def delete(self, index):
+        ''' Löscht das Element mit dem angegebenen Index'''
         aktuell = self.head # Ersten Node zum aktuellen machen
         i = 0 # Start beim ersten Index
         while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
@@ -56,6 +67,7 @@ class VerketteteListe:
         del aktuell                                   # Aktuellen Node löschen
 
     def insert(self, index, daten):
+        ''' Fügt ein daten-Element am angegebenen Index ein'''
         aktuell = self.head # Ersten Node zum aktuellen machen
         i = 0 # Start beim ersten Index
         while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
@@ -68,6 +80,7 @@ class VerketteteListe:
         vorgänger.nachfolger = neuer_Node             # Neuen Node als Nachfolger des Vorgängers festlegen
 
     def len(self):
+        ''' Liefert die Anzahl der Elemente (nodes) der Liste zurück'''
         if self.head == None: return 0     # Wenn die VL noch leer ist
         aktuell = self.head # Ersten Node zum aktuellen machen
         i = 0 # Start beim ersten Index
