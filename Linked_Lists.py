@@ -1,26 +1,26 @@
-# Verkettete Liste (VL) selbst implementiert - bislang nur init, append, get und VL-Ausgabe
+# Linked Lists (LL) for Python by Micky Roth 2023
 
 class Node:
     '''
-    Klasse für die einzelnen Listenlemente (Nodes)
+    Class for the list elements (Nodes)
     '''
     def __init__(self, daten):
         self.daten = daten     # Node mit Daten füllen
         self.nachfolger = None # Nachfolger ist (erstmal) keiner da
 
-class VerketteteListe:
-    ''' Klasse für eine Verkettete Liste (VL) 
-        Node = ein Element der VL
-        head = erster Node der VL
-        nachfolger = Nächstes Element der VL, steht im jeweiligen Node
+class LinkedList:
+    ''' Class for the linked list (LL) 
+        node = data element in the LL
+        head = first node in the LL
+        nachfolger = successor - next element in the LL
     '''
 
     def __init__(self):
-        ''' Initialisierung der verkettten Liste '''
+        ''' Initialisation of the LL '''
         self.head = None # Liste ist noch leer, deshalb gibt es noch keinen Head (ersten Node)
 
     def __repr__(self):  # Diese Standardmethode liefert eine Repräsentation z.B. für print() zurück
-        ''' Erzeugt die print-Ausgabe (Repräsentation) der Liste'''
+        ''' Generation of the print-output (representation) of the LL'''
         darstellung = [] # Temp-Variable für die Repräsentation (Darstellung) der VL
         aktuell = self.head # Ersten Node zum aktuellen machen
         if self.head!=None: # Falls mindestens ein Node existiert...
@@ -31,7 +31,7 @@ class VerketteteListe:
         return str(darstellung)
 
     def append(self, daten):      # Iteriert durch die VL, falls nötig und hängt einen neuen Node an
-        '''Hängt ein daten-Element an die Liste an'''
+        '''Appends a data element at the end of the LL'''
         neuer_Node = Node(daten)  # Neuen Node anlegen, Daten dort speichern
         if self.head == None:      # Wenn die VL noch leer ist
             self.head = neuer_Node # Dann ist der neue Node der Head!
@@ -43,7 +43,7 @@ class VerketteteListe:
         return
 
     def get(self, index):   # Liefert die Daten des Nodes mit dem Index zurück
-        ''' Liefert das Element mit dem angegebenen Index zurück'''
+        ''' Returns the element with the specified index'''
         if self.head == None:      # Wenn die VL noch leer ist
             raise IndexError('linked-list-index out of range')
         aktuell = self.head # Ersten Node zum aktuellen machen
@@ -55,7 +55,7 @@ class VerketteteListe:
         return aktuell.daten # Daten des aktuellen Nodes zurückgeben
 
     def delete(self, index):
-        ''' Löscht das Element mit dem angegebenen Index'''
+        ''' Deletes the element with the specified index'''
         aktuell = self.head # Ersten Node zum aktuellen machen
         i = 0 # Start beim ersten Index
         while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
@@ -67,7 +67,7 @@ class VerketteteListe:
         del aktuell                                   # Aktuellen Node löschen
 
     def insert(self, index, daten):
-        ''' Fügt ein daten-Element am angegebenen Index ein'''
+        ''' Inserts a data-element at the specified index position'''
         aktuell = self.head # Ersten Node zum aktuellen machen
         i = 0 # Start beim ersten Index
         while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
@@ -80,7 +80,7 @@ class VerketteteListe:
         vorgänger.nachfolger = neuer_Node             # Neuen Node als Nachfolger des Vorgängers festlegen
 
     def len(self):
-        ''' Liefert die Anzahl der Elemente (nodes) der Liste zurück'''
+        ''' Returns the number of nodes of the LL'''
         if self.head == None: return 0     # Wenn die VL noch leer ist
         aktuell = self.head # Ersten Node zum aktuellen machen
         i = 0 # Start beim ersten Index
@@ -91,30 +91,16 @@ class VerketteteListe:
 
 if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes das Hauptprogramm ausgeführt wird
 
-    from random import uniform # Float-Zufallszahlen, nur zum Befüllen der VL
+    mylliste = LinkedList() # Neue VL erzeugen
+    for i in range(8): mylliste.append(i+100)
 
-    vkliste = VerketteteListe() # Neue VL erzeugen
-    vkliste.append("Erstes")    # An die neue VL anhängen
-    vkliste.append("Zweites")
-    vkliste.append("Drittes")
-    for i in range(3): vkliste.append(i)
-    for i in range(3): vkliste.append(round(uniform(0,100),2))
+    print(mylliste)          # Greift auf die Methode __repr__() zu, um die komplette VL zu printen
+    print("get Index 3:",mylliste.get(6))   # Greift auf .get() zurück, um einen bestimmten Node auszulesen
 
-    print(vkliste)          # Greift auf die Methode __repr__() zu, um die komplette VL zu printen
-    print("Index 6:",vkliste.get(6))   # Greift auf .get() zurück, um einen bestimmten Node auszulesen
+    mylliste.delete(1)
+    print("Lösche (.delete) Index 1:", mylliste)
 
-    vkliste.delete(1)
-    print("Lösche (.delete) Index 1:",vkliste)
+    mylliste.insert(1, "Neues Element eingefügt!")
+    print(mylliste)
 
-    vkliste.insert(1, "Neues Zweites")
-    print(vkliste)
-
-    print("Länge:",vkliste.len())
-
-    vkliste2 = VerketteteListe()
-    print("Länge:",vkliste2.len())
-    vkliste2.append("Huhu")
-    print(vkliste2.get(0))
-
-    help(VerketteteListe)
-    
+    print("Länge(len):", mylliste.len(), "Elemente")
