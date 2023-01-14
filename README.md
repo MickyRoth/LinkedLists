@@ -1,4 +1,4 @@
-# LinkedLists by Micky 2023
+# LinkedLists.py
 
 Linked Lists implementation for Python 3<br>
 <br>
