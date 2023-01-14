@@ -42,6 +42,17 @@ class LinkedList:
         aktuell.nachfolger = neuer_Node   # An den letzten Node den neuen anhängen
         return
 
+    def set(self, index, daten):
+        ''' changes the content of a data-element at the specified index position'''
+        aktuell = self.head # Ersten Node zum aktuellen machen
+        i = 0 # Start beim ersten Index
+        while aktuell.nachfolger != None and i<index: # Solange ein Nachfolger vom aktuellen Node existiert...
+            vorgänger = aktuell                       # Vorgänger merken
+            aktuell = aktuell.nachfolger              # ...den Nachfolger zwischenspeichern
+            i+=1                                      # Indexvariable erhöhen
+        if index>i: raise IndexError('linked-list-index out of range') # Wenn der Index zu groß war, Error ausgeben
+        aktuell.daten = daten
+
     def get(self, index):   # Liefert die Daten des Nodes mit dem Index zurück
         ''' Returns the element with the specified index'''
         if self.head == None:      # Wenn die VL noch leer ist
@@ -79,6 +90,7 @@ class LinkedList:
         neuer_Node.nachfolger = aktuell               # Aktuellen Node als Nachfolger vom neuen Node festlegen
         vorgänger.nachfolger = neuer_Node             # Neuen Node als Nachfolger des Vorgängers festlegen
 
+
     def len(self):
         ''' Returns the number of nodes of the LL'''
         if self.head == None: return 0     # Wenn die VL noch leer ist
@@ -103,4 +115,8 @@ if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes
     mylliste.insert(1, "Neues Element eingefügt!")
     print(mylliste)
 
-    print("Länge(len):", mylliste.len(), "Elemente")
+    print("Ändere Element 1:")
+    mylliste.set(1, "Geändert")
+    print(mylliste)
+
+    print("Länge der Liste:", mylliste.len(), "Elemente")
