@@ -115,3 +115,6 @@ if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes
     print("Länge:",vkliste2.len())
     vkliste2.append("Huhu")
     print(vkliste2.get(0))
+
+    help(VerketteteListe)
+    
