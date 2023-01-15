@@ -1,4 +1,4 @@
-# LinkedLists
+# LinkedLists by Micky
 
 Linked Lists implementation for Python 3
 Including a demo how to make a linked list, append and delete data.

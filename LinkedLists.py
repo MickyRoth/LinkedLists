@@ -102,6 +102,7 @@ class LinkedList:
         return i+1                                              # Daten des Indexzählers zurückgeben
 
 if __name__ == "__main__":   # Verhindert, dass bei einem Import dieses Skriptes das Hauptprogramm ausgeführt wird
+    # Demonstration aller wichtiger Methoden
 
     mylliste = LinkedList() # Neue VL erzeugen
     for i in range(8): mylliste.append(i+100)
