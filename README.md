@@ -1,5 +1,3 @@
-# LinkedLists
-
 Linked Lists implementation for Python 3<br>
 <br>
 Implemented Methods:<br>
