@@ -9,4 +9,4 @@ Implemented Methods:<br>
 .len()      -> Getting the number of elements<br>
 <br>
 Including a demo how to make a linked list, append and delete data.<br>
-Use it with __import LinkedLists__ oder run LinkedLists.py for the demo
+Use it with import LinkedLists oder run LinkedLists.py for the demo
